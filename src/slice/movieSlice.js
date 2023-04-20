@@ -13,7 +13,6 @@ export const movieSlice = createSlice({
     movieDataSearch: [],
     movieDataSimilar:[],
     listContact: {},
-
     totalPage: 50,
   },
   reducers: {
@@ -191,7 +190,7 @@ export const fetchDetailMovie = (id) => async (dispatch) => {
     const data = await axios.get(Api, {
       params: {
         api_key: '44f95abe374b373cef58b8597abecbd3',
-        language: 'vi-VN'
+        // language: 'vi-VN'
       }
     })
     console.log(data);

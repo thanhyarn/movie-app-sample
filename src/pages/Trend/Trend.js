@@ -75,7 +75,7 @@ const Trend = ({ toggle , id}) => {
                     </Button>
                     <Button className='button-favorite' onClick={() => handleFavorite(movie)}>
                       <HeartOutlined />
-                      Yêu thích
+                      Favorite
                     </Button>
                   </div>
 

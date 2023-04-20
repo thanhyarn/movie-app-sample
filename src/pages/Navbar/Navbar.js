@@ -9,7 +9,7 @@ const Navbar = ({ toggle, setToggle }) => {
   function handleKeyPress(event) {
     if (event.key === 'Enter') {
       if (text === '') {
-        toast.error("Vui lòng nhập thông tin tìm kiếm")
+        toast.error("Please enter your search information")
       } else {
         window.location.href = `/search?query=${text}&page=1`;
       }
@@ -23,24 +23,24 @@ const Navbar = ({ toggle, setToggle }) => {
             <h1 id={toggle ? '' : 'heading'}>RIVIUFIM</h1>
           </NavLink>
           <NavLink to="/now_playing" style={({ isActive }) => { return { color: isActive ? '#fff' : '#EE9B00' } }}>
-            <span id={toggle ? 'Movies' : 'MoviesLight'}>Đang chiếu</span>
+            <span id={toggle ? 'Movies' : 'MoviesLight'}>now playing</span>
           </NavLink>
           <NavLink to="/upcoming" style={({ isActive }) => { return { color: isActive ? '#fff' : '#EE9B00' } }}>
-            <span id={toggle ? 'Movies' : 'MoviesLight'}>Sắp chiếu</span>
+            <span id={toggle ? 'Movies' : 'MoviesLight'}>Upcoming</span>
           </NavLink>
           <NavLink to="/popular" style={({ isActive }) => { return { color: isActive ? '#fff' : '#EE9B00' } }}>
-            <span id={toggle ? 'Movies' : 'MoviesLight'}>Phổ biến</span>
+            <span id={toggle ? 'Movies' : 'MoviesLight'}>popular</span>
           </NavLink>
           <NavLink to="/top_rated" style={({ isActive }) => { return { color: isActive ? '#fff' : '#EE9B00' } }}>
-            <span id={toggle ? 'Movies' : 'MoviesLight'}>Đánh giá cao</span>
+            <span id={toggle ? 'Movies' : 'MoviesLight'}>top rated</span>
           </NavLink>
           <NavLink to="/trending/all/day" style={({ isActive }) => { return { color: isActive ? '#fff' : '#EE9B00' } }}>
-            <span id={toggle ? 'Movies' : 'MoviesLight'}>Xu hướng</span>
+            <span id={toggle ? 'Movies' : 'MoviesLight'}>trend</span>
           </NavLink>
         </div>
         <div className='input-group'>
           <input
-            type="text" placeholder='Tìm kiếm phim'
+            type="text" placeholder='Movie search'
             onChange={(e) => setText(e.target.value)}
             value={text}
             onKeyPress={handleKeyPress}

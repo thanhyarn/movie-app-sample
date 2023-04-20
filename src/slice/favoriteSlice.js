@@ -14,7 +14,7 @@ export const favoriteSlice = createSlice({
             const movie = action.payload;
             if (validateFavotire(movie, state.movieData)){
                 state.movieData.push(movie)
-                toast.success("Thêm vào yêu thích")
+                toast.success("add to favorites")
             }
         },
         deleteFavorite: (state, action) => {
@@ -27,7 +27,7 @@ export const favoriteSlice = createSlice({
                 }
             })
             state.movieData = [...listMovieAfterUpdate]
-            toast.success("Xóa thành công")
+            toast.success("Successful delete")
         },
     }
 })
@@ -37,7 +37,7 @@ const validateFavotire = (movie , listMovie) => {
     if (!found){
         return true;
     } else {
-        toast.error("Phim đã được yêu thích trước đó")
+        toast.error("The movie was loved before")
         return false;
     }
 }

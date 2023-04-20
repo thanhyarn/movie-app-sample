@@ -10,10 +10,10 @@ const Homepage = ({toggle}) => {
     <Space className={`homepage ${toggle ? "mainBgColor" : "secondaryBgColor"}`} direction='vertical'>
         <Slide />
         <div className='media-lists' >
-          <MediaList title={"Đề xuất"} idTitle={"now_playing"} />
-          <MediaList title={"Sắp chiếu"} idTitle={"upcoming"}/>
-          <MediaList title={"Phổ biến"} idTitle={"popular"}/>
-          <MediaList title={"Đánh giá cao"} idTitle={"top_rated"}/>
+          <MediaList title={"Now Playing"} idTitle={"now_playing"} />
+          <MediaList title={"Upcoming"} idTitle={"upcoming"}/>
+          <MediaList title={"Popular"} idTitle={"popular"}/>
+          <MediaList title={"Top Rated"} idTitle={"top_rated"}/>
         </div>
       </Space>
    
