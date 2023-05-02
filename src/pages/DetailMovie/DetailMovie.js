@@ -6,6 +6,7 @@ import { Space, Button } from 'antd';
 import { BsFacebook, BsInstagram, BsTwitter, BsWikipedia } from "react-icons/bs"
 import './DetailMovie.css'
 import { loadListTrailer } from '../../slice/trailerSlice';
+import { addFavorite } from '../../slice/favoriteSlice';
 const DetailMovie = ({ toggle }) => {
     const iconClass = toggle ? 'icon white-icon' : 'icon black-icon';
     const location = useLocation();
@@ -15,7 +16,7 @@ const DetailMovie = ({ toggle }) => {
     const detailMovie = useSelector((state) => state.movie.detailMovie) || {}
     const listContact = useSelector((state) => state.movie.listContact)
     const listSimilarMovie = useSelector((state) => state.movie.movieDataSimilar) || []
-    const listTrailer = useSelector((state) => state.trailer.listTrailer)
+    const listTrailer = useSelector((state) => state.trailer.listTrailer) || []
     console.log(listTrailer);
     console.log(detailMovie);
     const Images = "https://image.tmdb.org/t/p/w500";
@@ -42,6 +43,10 @@ const DetailMovie = ({ toggle }) => {
         window.location.href = `/detail-movie?id=${id}`
     }
 
+    const handleFavorite = async (movie) => {
+        dispatch(addFavorite(movie))
+    }
+
     return (
         <Space className={`detail-movie-container ${toggle ? "mainBgColor" : "secondaryBgColor"}`} direction='vertical'>
             <Space direction='horizontal'>
@@ -49,10 +54,12 @@ const DetailMovie = ({ toggle }) => {
                     <Space direction='vertical'>
                         <img src={`${Images}${detailMovie.poster_path}`} />
                         <div className='revenue-info'>
-                            <h1>Revenue : {detailMovie.revenue ? convertRevenue(detailMovie.revenue) : "Chưa cập nhật"}</h1>
+                            <h1>Revenue : {detailMovie.revenue ? convertRevenue(detailMovie.revenue) : "Not updated yet"}</h1>
                         </div>
                         <div>
-                            <Button className='favorite-btn'
+                            <Button
+                                onClick={() => handleFavorite(detailMovie)}
+                                className='favorite-btn'
                             >Favorite</Button>
                         </div>
                     </Space>
@@ -155,7 +162,7 @@ const DetailMovie = ({ toggle }) => {
                     {listTrailer.map((trailer) => {
                         return (
                             <>
-                                <h1 style={{display: 'flex', float: 'left', color: 'orangered'}}>{trailer.name}</h1>
+                                <h1 style={{ display: 'flex', float: 'left', color: 'orangered' }}>{trailer.name}</h1>
                                 <iframe
                                     style={{ width: '100%', height: '720px' }}
                                     src={trailer.videoUrl}

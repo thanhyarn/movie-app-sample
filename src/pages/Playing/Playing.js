@@ -45,7 +45,6 @@ const Playing = ({ toggle, id }) => {
   }
 
   const handleFavorite = async (movie) => {
-    console.log(movie);
     dispatch(addFavorite(movie))
   }
 

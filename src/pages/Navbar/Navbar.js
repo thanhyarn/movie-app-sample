@@ -22,19 +22,19 @@ const Navbar = ({ toggle, setToggle }) => {
           <NavLink to="" style={({ isActive }) => { return { color: isActive ? '#fff' : '#EE9B00' } }}>
             <h1 id={toggle ? '' : 'heading'}>RIVIUFIM</h1>
           </NavLink>
-          <NavLink to="/now_playing" style={({ isActive }) => { return { color: isActive ? '#fff' : '#EE9B00' } }}>
+          <NavLink to="/now_playing?page=1" style={({ isActive }) => { return { color: isActive ? '#fff' : '#EE9B00' } }}>
             <span id={toggle ? 'Movies' : 'MoviesLight'}>now playing</span>
           </NavLink>
-          <NavLink to="/upcoming" style={({ isActive }) => { return { color: isActive ? '#fff' : '#EE9B00' } }}>
+          <NavLink to="/upcoming?page=1" style={({ isActive }) => { return { color: isActive ? '#fff' : '#EE9B00' } }}>
             <span id={toggle ? 'Movies' : 'MoviesLight'}>Upcoming</span>
           </NavLink>
-          <NavLink to="/popular" style={({ isActive }) => { return { color: isActive ? '#fff' : '#EE9B00' } }}>
+          <NavLink to="/popular?page=1" style={({ isActive }) => { return { color: isActive ? '#fff' : '#EE9B00' } }}>
             <span id={toggle ? 'Movies' : 'MoviesLight'}>popular</span>
           </NavLink>
-          <NavLink to="/top_rated" style={({ isActive }) => { return { color: isActive ? '#fff' : '#EE9B00' } }}>
+          <NavLink to="/top_rated?page=1" style={({ isActive }) => { return { color: isActive ? '#fff' : '#EE9B00' } }}>
             <span id={toggle ? 'Movies' : 'MoviesLight'}>top rated</span>
           </NavLink>
-          <NavLink to="/trending/all/day" style={({ isActive }) => { return { color: isActive ? '#fff' : '#EE9B00' } }}>
+          <NavLink to="/trending/all/day?page=1" style={({ isActive }) => { return { color: isActive ? '#fff' : '#EE9B00' } }}>
             <span id={toggle ? 'Movies' : 'MoviesLight'}>trend</span>
           </NavLink>
         </div>

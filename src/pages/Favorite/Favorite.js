@@ -5,6 +5,7 @@ import { playTrailer, turnOffTrailer, setLoading } from '../../slice/trailerSlic
 import { deleteFavorite } from '../../slice/favoriteSlice'
 import { Button, Modal } from 'antd';
 import { PlayCircleOutlined } from '@ant-design/icons';
+
 const Favorite = ({ toggle }) => {
     const dispatch = useDispatch();
     const movieData = useSelector((state) => state.favorite.movieData) || [];
@@ -37,27 +38,30 @@ const Favorite = ({ toggle }) => {
                 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
             >
 
-                < div className='movies-container'>
-                    {movieData && movieData.map((movie) => {
-                        return (
-                            <Fragment>
-                                <div id='container'>
-                                    <img onClick={() => clickDetailMovie(movie.id)} src={`${Images}${movie.poster_path}`} />
-                                    <h3 onClick={() => clickDetailMovie(movie.id)} className={toggle ? 'DarkTheme' : 'LightThemeClose'}>{movie.title}</h3>
-                                    <Button onClick={() => { handlePlayTrailer(movie.id) }} className='button-trailer'>
-                                        <PlayCircleOutlined />
-                                        Trailer
-                                    </Button>
-                                    <Button onClick={() => {handleDelete(movie)}} className='button-delete'>
-                                        <PlayCircleOutlined />
-                                        Xóa
-                                    </Button>
-                                </div>
-
-                            </Fragment>
-                        )
-                    })}
+                <div className='movies-container'>
+                    {movieData && movieData.length > 0 ?
+                        movieData.map((movie) => {
+                            return (
+                                <Fragment>
+                                    <div id='container'>
+                                        <img onClick={() => clickDetailMovie(movie.id)} src={`${Images}${movie.poster_path}`} />
+                                        <h3 onClick={() => clickDetailMovie(movie.id)} className={toggle ? 'DarkTheme' : 'LightThemeClose'}>{movie.title}</h3>
+                                        <Button onClick={() => { handlePlayTrailer(movie.id) }} className='button-trailer'>
+                                            <PlayCircleOutlined />
+                                            Trailer
+                                        </Button>
+                                        <Button onClick={() => { handleDelete(movie) }} className='button-delete'>
+                                            <PlayCircleOutlined />
+                                            Xóa
+                                        </Button>
+                                    </div>
+                                </Fragment>
+                            )
+                        }) :
+                        <img style={{width: '100%' , height: '100%'}} src='nodata.png' />
+                    }
                 </div>
+
             </div>
             <Modal className='modal-trailer' open={isLoad} onOk={handleOk} onCancel={handleCancel}>
                 <iframe
