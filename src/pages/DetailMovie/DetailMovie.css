@@ -1,81 +1,128 @@
-.detail-movie-container {
-    height: 400vh;
+.banner {
+    height: 50vh;
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-.detail-movie-container .poster {
-    height: 120vh;
+.banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Add styles for the mixin "overlay()" here */
+}
+
+.banner::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background-image: linear-gradient(to top, #0f0f0f, rgba(#000, 0));
+}
+
+.movie-content {
     display: flex;
-    justify-content: center;
-    text-align: center;
-    margin-top: 50px;
-    margin-left: 30px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    max-width: 1260px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -200px;
+    position: relative;
+    padding: 0 2rem;
 }
 
-.detail-movie-container .poster img{
-    transition: all 1.5s ease-in-out;
+.movie-content__poster {
+    flex: 1;
 }
 
-.detail-movie-container .poster img:hover{
-    transform: scale(1.01) rotateZ(1deg);
+.movie-content__poster__img {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 40px;
 }
 
-.info > div {
-    margin-top: 32px;
-    margin-bottom: 32px;
-    margin-right: 32px;
+/* Mobile Styles */
+@media screen and (max-width: 1000px) {
+    .movie-content__poster {
+        display: none;
+    }
+
+    .movie-content {
+        width: 100%;
+        padding-left: 0;
+    }
 }
 
-.detail-movie-container .poster img {
-    margin: 0 30px;
-    border: #38bdab solid 5px;
-    border-radius: 20px;
-    box-shadow: 5px 5px;
+.movie-content__info {
+    margin-top: 25%;
+    width: 70%;
+    padding-left: 2rem;
+    position: relative;
 }
 
-.detail-movie-container .poster .revenue-info {
-    font-size: large;
-    font-family: monospace;
-    color: orangered;
+/* Mobile Styles */
+@media screen and (max-width: 1000px) {
+    .movie-content__info {
+        width: 100%;
+        padding-left: 0;
+    }
+
+    
+    
 }
 
-.detail-movie-container .info {
-    height: 120vh;
+.movie-content__info > * {
+    margin-bottom: 2rem;
 }
 
-.info .movie-title {
-    font-size: 40px;
-    text-shadow: 1px 1px;
-    font-weight: bold;
-    background-image: linear-gradient(45deg, rgb(0, 204, 255), rgb(35, 238, 17));
-    background-clip: text;
-    color: transparent;
+.movie-content__info .title {
+    font-size: 2rem;
+    line-height: 1;
 }
 
-.movie-detail .set {
-    display: inline-block;
-    margin-right: 64px;
+.movie-content__info .genres > * ~ * {
+    margin-left: 0.5rem;
 }
 
-.movie-detail label {
-    font-size: 26px;
-    color: crimson;
-    font-weight: bold;
-    font-family: 'Courier New', Courier, monospace;
+.movie-content__info .genres__item {
+    padding: 0.5rem 1.5rem;
+    border: 2px solid #fff;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background-color: #0f0f0f;
 }
 
-.movie-detail span {
-    font-size: 20px;
-    font-family: 'Courier New', Courier, monospace;
-    color: #38bdab;
-    font-weight: bold;
+.casts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 10px;
 }
 
-.genres-container {}
+.casts__item__img {
+    padding-top: 160px;
+    background-size: cover;
+    margin-bottom: 0.5rem;
+}
 
-.title {
-    font-weight: bold;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: coral;
+.casts__item__name {
+    font-size: 0.8rem;
+}
+
+.video {
+    margin-bottom: 3rem;
+}
+
+.video__title {
+    margin-bottom: 1.5rem;
 }
 
 .genres-container .list-genres {
@@ -84,6 +131,7 @@
 }
 
 .list-genres .genres-item {
+    margin-top: 20px;
     margin-left: 20px;
     max-width: 100%;
     border: 1px solid red;
@@ -92,11 +140,11 @@
     border-radius: 20px;
 }
 
-.overview #content {
-    font-size: 20px;
+.title {
     font-weight: bold;
-    margin-left: 10px;
-    color: cornflowerblue;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: coral;
+    font-size: 24px;
 }
 
 .contact .icon {
@@ -111,15 +159,12 @@
     color: black
 }
 
-.poster .favorite-btn {
+.similar-movie .movies-container{
+    display: flex;
     width: 100%;
-    height: 60px;
-    font-size: 30px;
-    background-color: rgb(238, 133, 189);
-    border-radius: 30px;
+  
 }
 
 .list-trailer{
     width: 80%;
-    height: 10px;
 }

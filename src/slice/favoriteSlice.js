@@ -15,7 +15,7 @@ export const favoriteSlice = createSlice({
             if (validateFavotire(movie, state.movieData)){
                 state.movieData.push(movie)
                 toast.success("add to favorites")
-            }
+            } 
         },
         deleteFavorite: (state, action) => {
             const movieDeleted = action.payload;

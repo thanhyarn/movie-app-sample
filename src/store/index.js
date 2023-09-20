@@ -17,8 +17,9 @@ const persistConfig = {
 const rootReducer = combineReducers({
   movie: movieReducer,
   trailer: trailerReducer,
-  favorite: favoriteReducer,
+  favorite: favoriteReducer, 
 });
+
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 

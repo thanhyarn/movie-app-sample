@@ -7,10 +7,10 @@ import { fetch5MovieData } from '../../slice/movieSlice'
 const MediaList = ({ title, idTitle, toggle }) => {
     const dispatch = useDispatch();
     const [movieData, setMovieData] = useState([]);
-    const movieDataPlaying = useSelector((state) => state.movie.movieDataPlaying)
-    const movieDataUpcoming = useSelector((state) => state.movie.movieDataUpcoming)
-    const movieDataPopular = useSelector((state) => state.movie.movieDataPopular)
-    const movieDataToprated = useSelector((state) => state.movie.movieDataToprated)
+    const movieDataPlaying = useSelector((state) => state.movie.movieDataRandomPlaying)
+    const movieDataUpcoming = useSelector((state) => state.movie.movieDataRandomPopular)
+    const movieDataPopular = useSelector((state) => state.movie.movieDataRandomUpcoming)
+    const movieDataToprated = useSelector((state) => state.movie.movieDataRandomToprated)
     console.log(movieDataPlaying);
 
     useEffect(() => {
@@ -39,7 +39,7 @@ const MediaList = ({ title, idTitle, toggle }) => {
 
 
     const Images = 'https://image.tmdb.org/t/p/w500';
-    
+
 
 
     const clickDetailMovie = (id) => {
@@ -48,22 +48,24 @@ const MediaList = ({ title, idTitle, toggle }) => {
 
     return (
         <>
-            <Space style={{ width: '70%', marginLeft: '15%', display: 'flex', justifyContent: 'space-between' }} direction='horizontal'>
+            <Space style={{ width: '80%', marginLeft: '10%', display: 'flex', justifyContent: 'space-between' }} direction='horizontal'>
                 <Space direction='horizontal'>
                     <div className='divider' style={{ height: '50px', border: '5px solid red' }} > </div>
-                    <h3 style={{color: 'goldenrod'}}>{title}</h3>
+                    <h3 style={{ color: 'goldenrod' }}>{title}</h3>
                 </Space>
                 <Link to={idTitle}><h4>Xem tất cả</h4></Link>
             </Space>
             <Space direction='vertical' className='media-list-container'>
                 <div className='list'>
-                    <div className='movies-container '>
+                    <div className='movies-container'>
                         {movieData.map((movie) => {
                             return (
                                 <Fragment>
-                                    <div id='container'>
-                                        <img src={`${Images}${movie.poster_path}`} onClick={() => clickDetailMovie(movie.id)}/>
-                                        <h4 style={{cursor: 'point'}} onClick={() => clickDetailMovie(movie.id)} className={toggle ? 'DarkTheme' : 'LightThemeClose'}>{movie.title}</h4>
+                                    <div key={movie.id} className='movie-item'>
+                                        <div id='container'>
+                                            <img src={`${Images}${movie.poster_path}`} onClick={() => clickDetailMovie(movie.id)} />
+                                            <h4 style={{ cursor: 'point' }} onClick={() => clickDetailMovie(movie.id)} className={`movie-title ${toggle ? 'DarkTheme' : 'LightThemeClose'}`}>{movie.title}</h4>
+                                        </div>
                                     </div>
                                 </Fragment>
                             )

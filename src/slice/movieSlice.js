@@ -11,11 +11,17 @@ export const movieSlice = createSlice({
     movieDataToprated: [],
     movieDataTrend: [],
     movieDataSearch: [],
-    movieDataSimilar:[],
+    movieDataSimilar: [],
+    movieDataRandomPlaying: [],
+    movieDataRandomPopular: [],
+    movieDataRandomUpcoming: [],
+    movieDataRandomToprated: [],
     listContact: {},
     totalPage: 50,
   },
   reducers: {
+    
+
     setMovieDataPlaying: (state, action) => {
       state.movieDataPlaying = action.payload;
     },
@@ -45,6 +51,18 @@ export const movieSlice = createSlice({
     },
     setMovieDataSimilar: (state, action) => {
       state.movieDataSimilar = action.payload;
+    },
+    setMovieDataRandomPlaying: (state, action) => {
+      state.movieDataRandomPlaying = action.payload
+    },
+    setMovieDataRandomUpcoming: (state, action) => {
+      state.movieDataRandomUpcoming = action.payload
+    },
+    setMovieDataRandomPopular: (state, action) => {
+      state.movieDataRandomPopular = action.payload
+    },
+    setMovieDataRandomToprated: (state, action) => {
+      state.movieDataRandomToprated = action.payload
     }
   },
 });
@@ -60,6 +78,10 @@ export const {
   setDetailMovie,
   setListContact,
   setMovieDataSimilar,
+  setMovieDataRandomPlaying,
+  setMovieDataRandomPopular,
+  setMovieDataRandomToprated,
+  setMovieDataRandomUpcoming
 } = movieSlice.actions;
 
 
@@ -121,7 +143,7 @@ export const fetchMovieData = (id, page) => async (dispatch) => {
 
 const getRandomMovie = (list) => {
   const randomIndies = [];
-  while (randomIndies.length < 5) {
+  while (randomIndies.length < 4) {
     const index = Math.floor(Math.random() * list.length);
     if (!randomIndies.includes(index)) {
       randomIndies.push(index);
@@ -133,6 +155,8 @@ const getRandomMovie = (list) => {
 
 
 export const fetch5MovieData = (id) => async (dispatch) => {
+  console.log(id);
+
   const Api = `https://api.themoviedb.org/3/movie/${id}`
   try {
     const data = await axios.get(Api, {
@@ -142,19 +166,22 @@ export const fetch5MovieData = (id) => async (dispatch) => {
     })
     const result = data.data.results
 
+
     const dataRandom = getRandomMovie(result)
+
+    console.log(dataRandom);
     switch (id) {
       case "now_playing":
-        dispatch(setMovieDataPlaying(dataRandom));
+        dispatch(setMovieDataRandomPlaying(dataRandom));
         break;
       case "upcoming":
-        dispatch(setMovieDataUpcoming(dataRandom));
+        dispatch(setMovieDataRandomUpcoming(dataRandom));
         break;
       case "popular":
-        dispatch(setMovieDataPopular(dataRandom));
+        dispatch(setMovieDataRandomPopular(dataRandom));
         break;
       case "top_rated":
-        dispatch(setMovieDataToprated(dataRandom));
+        dispatch(setMovieDataRandomToprated(dataRandom));
         break;
       default:
         break;
@@ -229,7 +256,7 @@ export const fetchSimilarMovie = (id) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
-} 
+}
 
 
 export default movieSlice.reducer;

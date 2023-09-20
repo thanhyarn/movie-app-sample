@@ -1,16 +1,86 @@
-.media-list-container{
+.media-list-container {
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding: auto;
     width: 100%;
+    flex-wrap: wrap;
 }
 
 
-.media-list-container #container img{
-    width: 250px; 
-    height: 350px;
+.media-list-container #container img {
+    width: 300px;
+    height: 400px;
+    margin: 20px;
+    border-radius: 20px;
+}
+
+.media-list-container .movies-container {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 
+.media-list-container .movie-title {
+    width: 250px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
 
+.list-movies {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: auto;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.list-movies .movies-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.list-movies .movie-item {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.list-movies .movie-item img {
+    width: 350px;
+    margin: 20px auto;
+    border: 1px solid aquamarine;
+    border-radius: 20px;
+}
+
+.list-movies .movie-item .movie-title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+@media (max-width: 1500px) {
+    .list-movies .movie-item {
+        width: 50%;
+    }
+
+    .list-movies .movies-container {
+        margin: 0 150px;
+        justify-content: space-between;
+    }
+
+
+}
+
+/* For small screens (20 rows with 1 item per row) */
+@media (max-width: 1100px) {
+    .list-movies .movie-item  {
+        width: 100%;
+    }
+}

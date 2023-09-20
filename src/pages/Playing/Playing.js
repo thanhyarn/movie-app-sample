@@ -50,25 +50,26 @@ const Playing = ({ toggle, id }) => {
 
   const clickDetailMovie = (id) => {
     window.location.href = `/detail-movie?id=${id}`
-}
+  }
 
 
 
   return (
     <Fragment>
 
-      
-        <Space direction='vertical' className={toggle ? "mainBgColor" : "secondaryBgColor"}
-          style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-        >
 
+      <Space direction='vertical' className={toggle ? "mainBgColor" : "secondaryBgColor"}
+        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+      >
+
+        <Space className='list-movies'>
           <div className='movies-container'>
             {movieData.map((movie) => {
               return (
-                <Fragment>
+                <div key={movie.id} className='movie-item'>
                   <div id='container'>
-                    <img onClick={() => clickDetailMovie(movie.id)} src={`${Images}${movie.poster_path}`} />
-                    <h3 onClick={() => clickDetailMovie(movie.id)} className={toggle ? 'DarkTheme' : 'LightThemeClose'}>{movie.title}</h3>
+                    <img src={`${Images}${movie.poster_path}`} onClick={() => clickDetailMovie(movie.id)} />
+                    <h4 onClick={() => clickDetailMovie(movie.id)} className={`movie-title ${toggle ? 'DarkTheme' : 'LightThemeClose'}`}>{movie.title}</h4>
                     <Button onClick={() => { handlePlayTrailer(movie.id) }} className='button-trailer'>
                       <PlayCircleOutlined />
                       Trailer
@@ -78,16 +79,16 @@ const Playing = ({ toggle, id }) => {
                       Favorite
                     </Button>
                   </div>
-
-                </Fragment>
+                </div>
               )
             })}
           </div>
-          <div>
-          <PaginationMovie page={page} totalPage={totalPage} id={id}/>
-        </div>
         </Space>
-        
+        <div>
+          <PaginationMovie page={page} totalPage={totalPage} id={id} />
+        </div>
+      </Space>
+
       <Modal className='modal-trailer' open={isLoad} onOk={handleOk} onCancel={handleCancel}>
         <iframe
           style={{ width: '100%', height: '800px' }}

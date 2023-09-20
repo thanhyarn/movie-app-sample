@@ -47,46 +47,32 @@ const DetailMovie = ({ toggle }) => {
         dispatch(addFavorite(movie))
     }
 
+    const backgroundImageStyle = {
+        backgroundImage: detailMovie.poster_path ? `url(${Images}${detailMovie.backdrop_path})` : 'none',
+    };
+
     return (
-        <Space className={`detail-movie-container ${toggle ? "mainBgColor" : "secondaryBgColor"}`} direction='vertical'>
-            <Space direction='horizontal'>
-                <div className='poster'>
-                    <Space direction='vertical'>
-                        <img src={`${Images}${detailMovie.poster_path}`} />
-                        <div className='revenue-info'>
-                            <h1>Revenue : {detailMovie.revenue ? convertRevenue(detailMovie.revenue) : "Not updated yet"}</h1>
+        <>
+            <div style={{ background: '#0f0f0f' }}>
+                <div className="banner" style={backgroundImageStyle} ></div>
+                <div className="mb-3 movie-content container">
+                    <div className="movie-content__poster">
+                        <img className="movie-content__poster__img" src={`${Images}${detailMovie.poster_path}`} />
+                    </div>
+                    <div className="movie-content__info">
+                        <h1 className="title">
+                            {detailMovie.title || detailMovie.name}
+                        </h1>
+                        <div className="genres">
+                            {
+                                detailMovie.genres && detailMovie.genres.slice(0, 5).map((genre, i) => (
+                                    <span key={i} className="genres__item">{genre.name}</span>
+                                ))
+                            }
                         </div>
-                        <div>
-                            <Button
-                                onClick={() => handleFavorite(detailMovie)}
-                                className='favorite-btn'
-                            >Favorite</Button>
-                        </div>
-                    </Space>
-                </div>
-                <Space direction='vertical' className='info'>
-                    <h3 className='movie-title'>{detailMovie.title}</h3>
-                    <div className='movie-detail'>
-                        <Space direction='horizontal' className='movie-detail'>
-                            <Space direction='vertical' className='set'>
-                                <label>Release Date</label>
-                                <span>{detailMovie.release_date}</span>
-                            </Space>
-                            <Space direction='vertical' className='set'>
-                                <label>Runtime</label>
-                                <span>{convertRuntime(detailMovie.runtime)}</span>
-                            </Space>
-                            <Space direction='vertical' className='set'>
-                                <label>Vote Average</label>
-                                <span>{detailMovie.vote_average}</span>
-                            </Space>
-                            <Space direction='vertical' className='set'>
-                                <label>Vote Count</label>
-                                <span>{detailMovie.vote_count}</span>
-                            </Space>
-                        </Space>
+                        <p className="overview">{detailMovie.overview}</p>
                         <div className='genres-container'>
-                            <h2 className='title'>Genre</h2>
+                            <h5 className='title'>Genre</h5>
                             <div className='list-genres'>
                                 {detailMovie.genres && detailMovie.genres.map((genresItem) => {
                                     return (
@@ -95,14 +81,6 @@ const DetailMovie = ({ toggle }) => {
                                         </>
                                     )
                                 })}
-                            </div>
-                        </div>
-                        <div className='overview'>
-                            <div className='title'>
-                                <h2>Overview</h2>
-                            </div>
-                            <div id='content'>
-                                <h4>{detailMovie.overview}</h4>
                             </div>
                         </div>
                         {listContact && <Space className='contact' direction='horizontal'>
@@ -130,23 +108,30 @@ const DetailMovie = ({ toggle }) => {
                                 </Link>
                             }
                         </Space>}
+                    </div>
+                </div>
+                <Space direction='vertical' className="container" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <div className="section mb-3">
                         <div className='similar-movie'>
                             <h2 className='title'>Similar Movies</h2>
                             <div className='movies-container'>
                                 {listSimilarMovie.map((movie) => {
                                     return (
                                         <Fragment>
-                                            <div id='list-similar-movie'>
-                                                <img onClick={() => clickDetailMovie(movie.id)} style={{ width: '180px', height: '240px', margin: '10px' }} src={`${Images}${movie.poster_path}`} />
-                                                <h3 onClick={() => clickDetailMovie(movie.id)} style={{ width: '120px' }} className={toggle ? 'DarkTheme' : 'LightThemeClose'}>{movie.title}</h3>
-                                                {/* <Button onClick={() => { handlePlayTrailer(movie.id) }} className='button-trailer'>
-                                                <PlayCircleOutlined />
-                                                Trailer
-                                            </Button>
-                                            <Button className='button-favorite' onClick={() => handleFavorite(movie)}>
-                                                <HeartOutlined />
-                                                Yêu thích
-                                            </Button> */}
+                                            <div className='similar-movie-item'>
+                                                <img
+                                                    onClick={() => clickDetailMovie(movie.id)}
+                                                    style={{ width: '180px', height: '240px', margin: '10px' }}
+                                                    src={`${Images}${movie.poster_path}`}
+                                                    alt={movie.title} // Make sure to add the alt attribute for accessibility
+                                                />
+                                                <h3
+                                                    onClick={() => clickDetailMovie(movie.id)}
+                                                    style={{ width: '180px', height: '40px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+                                                    className={toggle ? 'DarkTheme' : 'LightThemeClose'}
+                                                >
+                                                    {movie.title}
+                                                </h3>
                                             </div>
 
                                         </Fragment>
@@ -155,27 +140,29 @@ const DetailMovie = ({ toggle }) => {
                             </div>
                         </div>
                     </div>
+                    <div className="section">
+                        <Space direction='vertical' style={{ display: 'flex', justifyContent: 'center', textAlign: 'center' }}>
+                            <Space className='list-trailer' direction='vertical'>
+                                {listTrailer.map((trailer) => {
+                                    return (
+                                        <>
+                                            <h1 style={{ display: 'flex', float: 'left', color: 'orangered' }}>{trailer.name}</h1>
+                                            <iframe
+                                                style={{ width: '100%', height: '320px' }}
+                                                src={trailer.videoUrl}
+                                                frameborder='0'
+                                                allow='autoplay; encrypted-media'
+                                                allowfullscreen
+                                            ></iframe>
+                                        </>
+                                    )
+                                })}
+                            </Space>
+                        </Space>
+                    </div>
                 </Space>
-            </Space>
-            <Space direction='vertical' style={{ display: 'flex', justifyContent: 'center', textAlign: 'center' }}>
-                <Space className='list-trailer' direction='vertical'>
-                    {listTrailer.map((trailer) => {
-                        return (
-                            <>
-                                <h1 style={{ display: 'flex', float: 'left', color: 'orangered' }}>{trailer.name}</h1>
-                                <iframe
-                                    style={{ width: '100%', height: '720px' }}
-                                    src={trailer.videoUrl}
-                                    frameborder='0'
-                                    allow='autoplay; encrypted-media'
-                                    allowfullscreen
-                                ></iframe>
-                            </>
-                        )
-                    })}
-                </Space>
-            </Space>
-        </Space>
+            </div>
+        </>
     )
 }
 

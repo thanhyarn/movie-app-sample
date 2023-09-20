@@ -50,7 +50,7 @@ const TopRated = ({ toggle, id }) => {
 
   const clickDetailMovie = (id) => {
     window.location.href = `/detail-movie?id=${id}`
-}
+  }
 
   return (
     <Fragment>
@@ -60,27 +60,20 @@ const TopRated = ({ toggle, id }) => {
         style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       >
 
-        <div className='movies-container'>
-          {movieData.map((movie) => {
-            return (
-              <Fragment>
-                <div id='container'>
-                  <img onClick={() => clickDetailMovie(movie.id)} src={`${Images}${movie.poster_path}`} />
-                  <h3 onClick={() => clickDetailMovie(movie.id)} className={toggle ? 'DarkTheme' : 'LightThemeClose'}>{movie.title}</h3>
-                  <Button onClick={() => { handlePlayTrailer(movie.id) }} className='button-trailer'>
-                    <PlayCircleOutlined />
-                    Trailer
-                  </Button>
-                  <Button className='button-favorite' onClick={() => handleFavorite(movie)}>
-                    <HeartOutlined />
-                    Favorite
-                  </Button>
+        <Space className='list-movies'>
+          <div className='movies-container'>
+            {movieData.map((movie) => {
+              return (
+                <div key={movie.id} className='movie-item'>
+                  <div id='container'>
+                    <img src={`${Images}${movie.poster_path}`} onClick={() => clickDetailMovie(movie.id)} />
+                    <h4 onClick={() => clickDetailMovie(movie.id)} className={`movie-title ${toggle ? 'DarkTheme' : 'LightThemeClose'}`}>{movie.title}</h4>
+                  </div>
                 </div>
-
-              </Fragment>
-            )
-          })}
-        </div>
+              )
+            })}
+          </div>
+        </Space>
         <div>
           <PaginationMovie page={page} totalPage={totalPage} id={id} />
         </div>
